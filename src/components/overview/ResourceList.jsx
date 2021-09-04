@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory, useLocation } from "react-router-dom";
 import { useQuery } from "react-query";
 import { getResource } from "../../services/SWAPI";
 import { getIdFromUrl } from "../../helpers/index";
@@ -8,10 +8,19 @@ import OverviewPagination from "./OverviewPagination";
 
 const ResourceList = ({ endpoint }) => {
   const [page, setPage] = useState(1);
-  // const history = useHistory();
+  const history = useHistory();
+  const location = useLocation();
+
   const { data, refetch } = useQuery("resource-list", () =>
-    getResource(endpoint)
+    getResource(endpoint + location.search)
   );
+
+  useEffect(() => {
+    return () => {
+      setPage(1);
+      // setEndpoint(null);
+    };
+  }, []);
 
   useEffect(() => {
     // refetches data when category is changed
@@ -20,10 +29,19 @@ const ResourceList = ({ endpoint }) => {
     // reset page to 1
     setPage(1);
 
-    // return () => {
-    //   history.push("/");
-    // };
+    // reset url to: "/"
+    history.push("/");
   }, [endpoint]);
+
+  useEffect(() => {
+    if (location.search) {
+      refetch();
+    }
+  }, [location]);
+
+  useEffect(() => {
+    history.push(`?page=${page}`);
+  }, [page]);
 
   const countProps = data && Math.ceil(data.count / 10);
 
@@ -34,10 +52,10 @@ const ResourceList = ({ endpoint }) => {
       <div className="my-5 mx-auto">
         <ListGroup as="ul">
           {data &&
-            data.results.map((resource, index) => {
+            data?.results?.map((resource, index) => {
               return (
                 <ListGroup.Item as="li" key={index}>
-                  <NavLink to={getIdFromUrl(resource.url)}>
+                  <NavLink exact to={endpoint + getIdFromUrl(resource.url)}>
                     {resource.name}
                   </NavLink>
                 </ListGroup.Item>
@@ -46,7 +64,7 @@ const ResourceList = ({ endpoint }) => {
         </ListGroup>
       </div>
 
-      <OverviewPagination {...values} count={countProps} />
+      {data && <OverviewPagination {...values} count={countProps} />}
     </>
   );
 };

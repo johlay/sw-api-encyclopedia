@@ -23,7 +23,7 @@ const Categories = () => {
         <Button onClick={() => setEndpoint("/starships/")}>Starships</Button>
         <Button onClick={() => setEndpoint("/vehicles/")}>Vehicles</Button>
       </ButtonGroup>
-      <ResourceList endpoint={endpoint} />
+      {endpoint && <ResourceList endpoint={endpoint} />}
     </>
   );
 };

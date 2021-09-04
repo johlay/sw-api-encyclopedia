@@ -12,10 +12,10 @@ const baseURL = "https://swapi.dev/api";
 // React Query expects a promise.
 
 /* Resource */
-export const getResource = async (endpoint) => {
+export const getResource = async (endpoint, page = "") => {
   if (endpoint === null || undefined) return;
 
-  const response = await axios(baseURL + endpoint);
+  const response = await axios(baseURL + endpoint + page);
 
   return response.data;
 };
@@ -23,37 +23,37 @@ export const getResource = async (endpoint) => {
 export const getFilm = async (id) => {
   const response = await axios(baseURL + "/films/" + id);
 
-  return response;
+  return response.data;
 };
 
-export const getPeople = async (id) => {
+export const getPerson = async (id) => {
   const response = await axios(baseURL + "/people/" + id);
 
-  return response;
+  return response.data;
 };
 
 export const getPlanet = async (id) => {
   const response = await axios(baseURL + "/planets/" + id);
 
-  return response;
+  return response.data;
 };
 
 export const getSpecie = async (id) => {
   const response = await axios(baseURL + "/species/" + id);
 
-  return response;
+  return response.data;
 };
 
 export const getStarship = async (id) => {
   const response = await axios(baseURL + "/starships/" + id);
 
-  return response;
+  return response.data;
 };
 
 export const getVehicle = async (id) => {
   const response = await axios(baseURL + "/vehicles/" + id);
 
-  return response;
+  return response.data;
 };
 
 // /* Films */

@@ -1,10 +1,8 @@
-import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Pagination from "react-bootstrap/Pagination";
 
 const OverviewPagination = ({ count, data, page, setPage }) => {
-  if (!data) return null;
-
+  const history = useHistory();
   let items = [];
 
   for (let number = 1; number <= count; number++) {
@@ -13,7 +11,7 @@ const OverviewPagination = ({ count, data, page, setPage }) => {
         active={number === page}
         activeLabel={false}
         onClick={() => {
-          // history.push(`?page=${number}`);
+          history.push(`?page=${number}`);
 
           setPage(number);
         }}
