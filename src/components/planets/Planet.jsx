@@ -1,6 +1,6 @@
 import { useHistory, useParams } from "react-router-dom";
 import { Button, Container } from "react-bootstrap";
-import { getPlanet } from "../../../services/SWAPI";
+import { getPlanet } from "../../services/SWAPI";
 import { useQuery } from "react-query";
 import Resident from "./Resident";
 
@@ -10,7 +10,6 @@ const Planet = () => {
 
   const { data } = useQuery("get-planet", () => getPlanet(planetId));
 
-  console.log(data);
   return (
     <Container>
       <Button className="my-3" onClick={() => history.push("/")}>
@@ -29,16 +28,9 @@ const Planet = () => {
         <h3>List of people that lives on this planet</h3>
 
         {data &&
-          data.residents.map((resident, index) => {
+          data?.residents?.map((resident, index) => {
             return <Resident resident={resident} key={index} />;
           })}
-        {/* <NavLink
-        className="h6"
-        exact
-        to={data ? `/planets/${getIdFromUrl(data?.homeworld)}` : "#"}
-      >
-        Learn about {data?.name}'s Homeworld
-      </NavLink> */}
       </div>
     </Container>
   );

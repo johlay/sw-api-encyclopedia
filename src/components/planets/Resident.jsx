@@ -1,5 +1,5 @@
-import { getIdFromUrl } from "../../../helpers/index";
-import { getPerson } from "../../../services/SWAPI";
+import { getIdFromUrl } from "../../helpers/index";
+import { getPerson } from "../../services/SWAPI";
 import { useQuery } from "react-query";
 import { useEffect } from "react";
 import { NavLink } from "react-router-dom";

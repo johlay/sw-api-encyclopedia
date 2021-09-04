@@ -2,8 +2,11 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import OverviewPage from "./pages/OverviewPage";
-import Person from "./components/overview/people/Person";
-import Planet from "./components/overview/planets/Planet";
+import Person from "./components/people/Person";
+import Planet from "./components/planets/Planet";
+import Specie from "./components/specie/Specie";
+import Starship from "./components/starships/Starship";
+import Vehicle from "./components/vehicles/Vehicle";
 
 function App() {
   const queryClient = new QueryClient();
@@ -27,9 +30,15 @@ function App() {
             <Route exact path="/planets/:planetId">
               <Planet />
             </Route>
-            <Route path="/species"></Route>
-            <Route path="/starships"></Route>
-            <Route path="/vehicles"></Route>
+            <Route path="/species/:specieId">
+              <Specie />
+            </Route>
+            <Route path="/starships/:shipId">
+              <Starship />
+            </Route>
+            <Route path="/vehicles/:vehicleId">
+              <Vehicle />
+            </Route>
           </Switch>
         </BrowserRouter>
       </QueryClientProvider>
