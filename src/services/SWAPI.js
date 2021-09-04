@@ -20,6 +20,42 @@ export const getResource = async (endpoint) => {
   return response.data;
 };
 
+export const getFilm = async (id) => {
+  const response = await axios(baseURL + "/films/" + id);
+
+  return response;
+};
+
+export const getPeople = async (id) => {
+  const response = await axios(baseURL + "/people/" + id);
+
+  return response;
+};
+
+export const getPlanet = async (id) => {
+  const response = await axios(baseURL + "/planets/" + id);
+
+  return response;
+};
+
+export const getSpecie = async (id) => {
+  const response = await axios(baseURL + "/species/" + id);
+
+  return response;
+};
+
+export const getStarship = async (id) => {
+  const response = await axios(baseURL + "/starships/" + id);
+
+  return response;
+};
+
+export const getVehicle = async (id) => {
+  const response = await axios(baseURL + "/vehicles/" + id);
+
+  return response;
+};
+
 // /* Films */
 // export const getFilms = async (endpoint = "/films/") => {
 //   const response = await axios(baseURL + endpoint);

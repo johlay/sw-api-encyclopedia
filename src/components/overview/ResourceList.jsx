@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { useQuery } from "react-query";
 import { getResource } from "../../services/SWAPI";
+import { getIdFromUrl } from "../../helpers/index";
 import { ListGroup } from "react-bootstrap";
 import OverviewPagination from "./OverviewPagination";
 
@@ -22,7 +23,6 @@ const ResourceList = ({ endpoint }) => {
     // return () => {
     //   history.push("/");
     // };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [endpoint]);
 
   const countProps = data && Math.ceil(data.count / 10);
@@ -35,10 +35,11 @@ const ResourceList = ({ endpoint }) => {
         <ListGroup as="ul">
           {data &&
             data.results.map((resource, index) => {
-              console.log("resource:", resource);
               return (
                 <ListGroup.Item as="li" key={index}>
-                  <NavLink to={endpoint}>{resource.name}</NavLink>
+                  <NavLink to={getIdFromUrl(resource.url)}>
+                    {resource.name}
+                  </NavLink>
                 </ListGroup.Item>
               );
             })}
