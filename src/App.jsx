@@ -3,6 +3,7 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import ThemeContextProvider from "./contexts/ThemeContextProvider";
 import Theme from "./components/theme/Theme";
+import Navigation from "./components/Navbar";
 import OverviewPage from "./pages/OverviewPage";
 import Person from "./components/people/Person";
 import Planet from "./components/planets/Planet";
@@ -18,6 +19,7 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <ThemeContextProvider>
           <Theme>
+            <Navigation />
             <BrowserRouter>
               <ReactQueryDevtools initialIsOpen={false} />
               <Switch>
