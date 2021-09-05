@@ -1,7 +1,7 @@
 import { useHistory } from "react-router-dom";
 import Pagination from "react-bootstrap/Pagination";
 
-const OverviewPagination = ({ count, data, page, setPage }) => {
+const OverviewPagination = ({ count, page, setPage, searchText }) => {
   const history = useHistory();
   let items = [];
 
@@ -12,6 +12,11 @@ const OverviewPagination = ({ count, data, page, setPage }) => {
         activeLabel={false}
         onClick={() => {
           history.push(`?page=${number}`);
+          // history.push(
+          //   searchText
+          //     ? `?page=${number}&search=${searchText}`
+          //     : `?page=${number}`
+          // );
 
           setPage(number);
         }}

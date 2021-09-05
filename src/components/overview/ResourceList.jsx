@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
-import { NavLink, useHistory, useLocation } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { useQuery } from "react-query";
 import { getResource } from "../../services/SWAPI";
-import { getIdFromUrl } from "../../helpers/index";
-import { ListGroup } from "react-bootstrap";
 import OverviewPagination from "./OverviewPagination";
+import Search from "./Search";
+import ShowCategory from "./ShowCategory";
 
 const ResourceList = ({ endpoint }) => {
+  const [searchText, setSearchText] = useState("");
   const [page, setPage] = useState(1);
   const history = useHistory();
   const location = useLocation();
 
-  const { data, refetch, isPreviousData } = useQuery(
+  const { data, refetch } = useQuery(
     "resource-list",
     () => getResource(endpoint + location.search),
     { keepPreviousData: true }
@@ -19,7 +20,6 @@ const ResourceList = ({ endpoint }) => {
   useEffect(() => {
     return () => {
       setPage(1);
-      // setEndpoint(null);
     };
   }, []);
 
@@ -29,6 +29,9 @@ const ResourceList = ({ endpoint }) => {
 
     // reset page to 1
     setPage(1);
+
+    // reset search text
+    setSearchText("");
 
     // reset url to: "/"
     history.push("/");
@@ -41,28 +44,22 @@ const ResourceList = ({ endpoint }) => {
   }, [location]);
 
   useEffect(() => {
-    history.push(`?page=${page}`);
+    // history.push(`?page=${page}`);
+    if (searchText.length === 0) history.push(`?page=${page}`);
+
+    if (searchText.length >= 0)
+      history.push(`?page=${page}&search=${searchText}`);
   }, [page]);
 
   const countProps = data && Math.ceil(data.count / 10);
 
-  const values = { data, page, setPage };
+  const values = { data, page, setPage, searchText, setSearchText };
 
   return (
     <>
       <div className="my-5 mx-auto">
-        <ListGroup as="ul">
-          {data &&
-            data?.results?.map((resource, index) => {
-              return (
-                <ListGroup.Item as="li" key={index}>
-                  <NavLink exact to={endpoint + getIdFromUrl(resource.url)}>
-                    {resource.name}
-                  </NavLink>
-                </ListGroup.Item>
-              );
-            })}
-        </ListGroup>
+        <Search endpoint={endpoint} {...values} />
+        <ShowCategory endpoint={endpoint} data={data} />
       </div>
 
       {data && <OverviewPagination {...values} count={countProps} />}
