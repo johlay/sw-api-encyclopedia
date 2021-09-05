@@ -12,7 +12,7 @@ const ResourceList = ({ endpoint }) => {
   const history = useHistory();
   const location = useLocation();
 
-  const { data, refetch } = useQuery(
+  const { data, isLoading, refetch } = useQuery(
     "resource-list",
     () => getResource(endpoint + location.search),
     { keepPreviousData: true }
@@ -53,7 +53,7 @@ const ResourceList = ({ endpoint }) => {
 
   const countProps = data && Math.ceil(data.count / 10);
 
-  const values = { data, page, setPage, searchText, setSearchText };
+  const values = { data, page, setPage, searchText, setSearchText, isLoading };
 
   return (
     <>
@@ -61,7 +61,6 @@ const ResourceList = ({ endpoint }) => {
         <Search endpoint={endpoint} {...values} />
         <ShowCategory endpoint={endpoint} data={data} />
       </div>
-
       {data && <OverviewPagination {...values} count={countProps} />}
     </>
   );

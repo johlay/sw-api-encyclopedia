@@ -1,8 +1,6 @@
-import { useHistory } from "react-router-dom";
 import Pagination from "react-bootstrap/Pagination";
 
-const OverviewPagination = ({ count, page, setPage, searchText }) => {
-  const history = useHistory();
+const OverviewPagination = ({ count, page, setPage, isLoading }) => {
   let items = [];
 
   for (let number = 1; number <= count; number++) {
@@ -17,8 +15,7 @@ const OverviewPagination = ({ count, page, setPage, searchText }) => {
           //     ? `?page=${number}&search=${searchText}`
           //     : `?page=${number}`
           // );
-
-          setPage(number);
+          if (!isLoading) setPage(number);
         }}
         key={number}
       >
@@ -32,22 +29,24 @@ const OverviewPagination = ({ count, page, setPage, searchText }) => {
       <Pagination.Prev
         disabled={page === 1}
         onClick={() => {
-          setPage((prev) => {
-            if (prev === 1) return 1;
+          if (!isLoading)
+            setPage((prev) => {
+              if (prev === 1) return 1;
 
-            return prev - 1;
-          });
+              return prev - 1;
+            });
         }}
       />
       {items.map((item) => item)}
       <Pagination.Next
         disabled={page === count}
         onClick={() => {
-          setPage((prev) => {
-            if (prev === count) return count;
+          if (!isLoading)
+            setPage((prev) => {
+              if (prev === count) return count;
 
-            return prev + 1;
-          });
+              return prev + 1;
+            });
         }}
       />
     </Pagination>
