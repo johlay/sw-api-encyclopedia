@@ -11,12 +11,11 @@ const ResourceList = ({ endpoint }) => {
   const history = useHistory();
   const location = useLocation();
 
-  const { data, refetch } = useQuery(
+  const { data, refetch, isPreviousData } = useQuery(
     "resource-list",
     () => getResource(endpoint + location.search),
     { keepPreviousData: true }
   );
-
   useEffect(() => {
     return () => {
       setPage(1);

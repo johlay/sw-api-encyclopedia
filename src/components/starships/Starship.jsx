@@ -7,9 +7,7 @@ const Specie = () => {
   const { shipId } = useParams();
   const history = useHistory();
 
-  const { data } = useQuery("get-specie", () => getStarship(shipId), {
-    keepPreviousData: true,
-  });
+  const { data } = useQuery("get-specie", () => getStarship(shipId));
 
   console.log(data);
   return (

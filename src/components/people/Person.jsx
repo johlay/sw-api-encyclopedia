@@ -8,9 +8,7 @@ const Person = () => {
   const { personId } = useParams();
   const history = useHistory();
 
-  const { data } = useQuery("get-person", () => getPerson(personId), {
-    keepPreviousData: true,
-  });
+  const { data } = useQuery("get-person", () => getPerson(personId));
 
   return (
     <Container>
