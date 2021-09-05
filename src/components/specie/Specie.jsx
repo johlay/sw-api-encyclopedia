@@ -7,7 +7,9 @@ const Specie = () => {
   const { specieId } = useParams();
   const history = useHistory();
 
-  const { data } = useQuery("get-specie", () => getSpecie(specieId));
+  const { data } = useQuery("get-specie", () => getSpecie(specieId), {
+    keepPreviousData: true,
+  });
 
   console.log(data);
   return (

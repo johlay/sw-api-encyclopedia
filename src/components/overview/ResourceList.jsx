@@ -11,8 +11,10 @@ const ResourceList = ({ endpoint }) => {
   const history = useHistory();
   const location = useLocation();
 
-  const { data, refetch } = useQuery("resource-list", () =>
-    getResource(endpoint + location.search)
+  const { data, refetch } = useQuery(
+    "resource-list",
+    () => getResource(endpoint + location.search),
+    { keepPreviousData: true }
   );
 
   useEffect(() => {

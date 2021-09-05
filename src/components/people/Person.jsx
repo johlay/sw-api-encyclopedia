@@ -8,7 +8,9 @@ const Person = () => {
   const { personId } = useParams();
   const history = useHistory();
 
-  const { data } = useQuery("get-person", () => getPerson(personId));
+  const { data } = useQuery("get-person", () => getPerson(personId), {
+    keepPreviousData: true,
+  });
 
   return (
     <Container>
@@ -26,7 +28,7 @@ const Person = () => {
         </dl>
 
         <hr />
-        
+
         <NavLink
           className="h6"
           exact

@@ -10,6 +10,7 @@ import Planet from "./components/planets/Planet";
 import Specie from "./components/specie/Specie";
 import Starship from "./components/starships/Starship";
 import Vehicle from "./components/vehicles/Vehicle";
+import GlobalFetchingSpinner from "./components/loading/GlobalFetchingSpinner";
 
 function App() {
   const queryClient = new QueryClient();
@@ -20,6 +21,7 @@ function App() {
         <ThemeContextProvider>
           <Theme>
             <Navigation />
+            <GlobalFetchingSpinner />
             <BrowserRouter>
               <ReactQueryDevtools initialIsOpen={false} />
               <Switch>

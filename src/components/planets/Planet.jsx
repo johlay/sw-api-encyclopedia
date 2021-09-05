@@ -8,7 +8,9 @@ const Planet = () => {
   const { planetId } = useParams();
   const history = useHistory();
 
-  const { data } = useQuery("get-planet", () => getPlanet(planetId));
+  const { data } = useQuery("get-planet", () => getPlanet(planetId), {
+    keepPreviousData: true,
+  });
 
   return (
     <Container>
