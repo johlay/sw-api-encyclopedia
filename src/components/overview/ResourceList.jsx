@@ -47,7 +47,7 @@ const ResourceList = ({ endpoint }) => {
     // history.push(`?page=${page}`);
     if (searchText.length === 0) history.push(`?page=${page}`);
 
-    if (searchText.length >= 0)
+    if (searchText.length > 0)
       history.push(`?page=${page}&search=${searchText}`);
   }, [page]);
 

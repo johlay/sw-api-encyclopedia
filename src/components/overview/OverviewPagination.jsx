@@ -11,7 +11,7 @@ const OverviewPagination = ({ count, page, setPage, searchText }) => {
         active={number === page}
         activeLabel={false}
         onClick={() => {
-          history.push(`?page=${number}`);
+          // history.push(`?page=${number}`);
           // history.push(
           //   searchText
           //     ? `?page=${number}&search=${searchText}`
