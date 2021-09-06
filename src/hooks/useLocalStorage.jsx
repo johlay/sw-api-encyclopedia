@@ -4,7 +4,7 @@ const useLocalStorage = (key, initialValue) => {
   const [value, setValue] = useState(() => {
     const jsonValue = JSON.parse(localStorage.getItem(key));
 
-    // if key:value pair is not saved in local storage, return initialValue
+    // if key:value pair is not already saved in local storage, return initialValue
     if (jsonValue === null) return initialValue;
 
     if (jsonValue) return jsonValue;

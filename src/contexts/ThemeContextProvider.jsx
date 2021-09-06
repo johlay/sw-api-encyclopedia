@@ -1,9 +1,19 @@
 import { createContext, useEffect, useState } from "react";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 export const ThemeContext = createContext();
 
 const ThemeContextProvider = ({ children }) => {
-  const [theme, setTheme] = useState("bg-dark");
+  const [theme, setTheme] = useState(null);
+  const [value, setValue] = useLocalStorage("theme");
+
+  useEffect(() => {
+    setTheme(() => (value ? value : "bg-dark"));
+  }, []);
+
+  useEffect(() => {
+    setValue(theme);
+  }, [theme]);
 
   const toggleTheme = () =>
     setTheme(theme === "bg-dark" ? "bg-light" : "bg-dark");
