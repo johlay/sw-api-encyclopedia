@@ -9,7 +9,6 @@ const Specie = () => {
 
   const { data } = useQuery("get-specie", () => getStarship(shipId));
 
-  console.log(data);
   return (
     <Container>
       <Button className="my-3" onClick={() => history.push("/")}>

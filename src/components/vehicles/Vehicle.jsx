@@ -9,7 +9,6 @@ const Planet = () => {
 
   const { data } = useQuery("get-planet", () => getVehicle(vehicleId));
 
-  console.log(data);
   return (
     <Container>
       <Button className="my-3" onClick={() => history.push("/")}>
