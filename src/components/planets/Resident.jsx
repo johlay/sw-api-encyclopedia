@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { getIdFromUrl } from "../../helpers/index";
 import { getPerson } from "../../services/SWAPI";
 import { useQuery } from "react-query";
