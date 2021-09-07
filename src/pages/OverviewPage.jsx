@@ -1,4 +1,4 @@
-import Container from "react-bootstrap/container";
+import Container from "react-bootstrap/Container";
 import Categories from "../components/overview/Categories";
 
 const OverviewPage = () => {
